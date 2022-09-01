@@ -11,6 +11,17 @@ class MoviesController < ApplicationController
     render json: movie
   end
 
+  def summary 
+    movie = Movie.find(params[:id])
+    render json: movie, serializer: MovieSummarySerializer
+  end
+
+  # render the full collection of movies, create another route and action
+  def summaries 
+    movies = movie.all
+    render json: movies, each_serializer: MovieSummarySerializer
+  end
+
   private
 
   def render_not_found_response
